@@ -28,18 +28,18 @@ namespace ConsoleApp3
 
 
 
-        public async void postAsync(Login login)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:63338");
-                //client.DefaultRequestHeaders.Add("content-type", "application/json");
-                var result = await client.PostAsJsonAsync("/api/Account/Login", login);
-                string resultContent = await result.Content.ReadAsStringAsync();
-                Console.WriteLine(resultContent);
-                Console.ReadLine();
-            }
-        }
+        //public async void postAsync(Login login)
+        //{
+        //    using (var client = new HttpClient())
+        //    {
+        //        client.BaseAddress = new Uri("http://localhost:63338");
+        //        //client.DefaultRequestHeaders.Add("content-type", "application/json");
+        //        var result = await client.PostAsJsonAsync("/api/Account/Login", login);
+        //        string resultContent = await result.Content.ReadAsStringAsync();
+        //        Console.WriteLine(resultContent);
+        //        Console.ReadLine();
+        //    }
+        //}
         public async Task<string> Register(Login Usr)
         {
 
@@ -65,39 +65,39 @@ namespace ConsoleApp3
         }
 
 
-        public async Task SendRequestAsync()
-        {
-            using (var stream = new MemoryStream())
-            using (var bson = new BsonWriter(stream))
-            {
-                var jsonSerializer = new JsonSerializer();
+        //public async Task SendRequestAsync()
+        //{
+        //    using (var stream = new MemoryStream())
+        //    using (var bson = new BsonWriter(stream))
+        //    {
+        //        var jsonSerializer = new JsonSerializer();
 
-                //var request = new Login
-                //{
-                //    username = "aaa"
-                //   // hashPassword = new byte[] { 2, 5, 7, 10 }
-                //};
+        //        //var request = new Login
+        //        //{
+        //        //    username = "aaa"
+        //        //   // hashPassword = new byte[] { 2, 5, 7, 10 }
+        //        //};
 
-                //jsonSerializer.Serialize(bson, request);
+        //        //jsonSerializer.Serialize(bson, request);
 
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri("http://localhost:63338/api/Account/Login")
-                };
+        //        var client = new HttpClient
+        //        {
+        //            BaseAddress = new Uri("http://localhost:63338/api/Account/Login")
+        //        };
 
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(
-                        new MediaTypeWithQualityHeaderValue("application/bson"));
+        //        client.DefaultRequestHeaders.Accept.Clear();
+        //        client.DefaultRequestHeaders.Accept.Add(
+        //                new MediaTypeWithQualityHeaderValue("application/bson"));
 
-                var byteArrayContent = new ByteArrayContent(stream.ToArray());
-                byteArrayContent.Headers.ContentType = new MediaTypeHeaderValue("application/bson");
+        //        var byteArrayContent = new ByteArrayContent(stream.ToArray());
+        //        byteArrayContent.Headers.ContentType = new MediaTypeHeaderValue("application/bson");
 
-                var result = await client.PostAsync(
-                        "api/Account/Login", byteArrayContent);
+        //        var result = await client.PostAsync(
+        //                "api/Account/Login", byteArrayContent);
 
-                result.EnsureSuccessStatusCode();
-            }
-        }
+        //        result.EnsureSuccessStatusCode();
+        //    }
+        //}
 
 
     }
