@@ -89,6 +89,7 @@
     <Compile Include="ExpressionString.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Hash.cs" />
+    <Compile Include="InputExpressions.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Parametres.cs" />
     <Compile Include="Program.cs" />

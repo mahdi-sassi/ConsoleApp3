@@ -61,26 +61,41 @@ namespace ConsoleApp3
         }
         static void  Main(string[] args)
         {
-            var expressionJson = new ExpressionJson<Categorys>();
+            var expressionJson = new ExpressionJson<Vendors>();
             var jsonString = expressionJson.Serialize((Expression<Func<Vendors, bool>>)(c => c.NameEn.Length<2 && c.DescriptionAr == "zzzzzzz"));
             var IncludeJson = expressionJson.Serialize((Expression<Func<Vendors, object>>)(c => c.VendorsCategories));
+            var OrderByJson = expressionJson.Serialize((Expression<Func<Vendors, Object>>)(c => c.NameEn));
             //var jsonString =TestExpression((Expression<Func<Categorys, bool>>)(c => c.Address=="" && c.Name==""));
+            //expressionJson.Deserialize(OrderByJson).Reduce
 
+            string OrderByString = JsonConvert.SerializeObject(OrderByJson);
+            OrderByString = OrderByString.Replace("ConsoleApp3", "WmsPosApi.Models.BaseModels");
+
+            string IncludeString = JsonConvert.SerializeObject(IncludeJson);
+            IncludeString = IncludeString.Replace("ConsoleApp3", "WmsPosApi.Models.BaseModels");
             string s = JsonConvert.SerializeObject(jsonString);
             string s1 = s.Replace("ConsoleApp3", "WmsPosApi.Models.BaseModels");
 
-            string IncludeString = JsonConvert.SerializeObject(jsonString);
-            IncludeString = IncludeString.Replace("ConsoleApp3", "WmsPosApi.Models.BaseModels");
-            Categorys expressionString = new Categorys();
-            expressionString.Name = s;
-            string xxxx = JsonConvert.SerializeObject(expressionString);
 
-            var client = new RestClient("http://localhost:55574/api/PostGetVendors");
+            InputExpressions inputExpressions = new InputExpressions();
+            inputExpressions.expression = s1;
+            inputExpressions.inclules = new List<string>();
+            inputExpressions.orderBy = new List<string>();
+            inputExpressions.inclules.Add(IncludeString);
+            inputExpressions.orderBy.Add(OrderByString);
+
+            string input = JsonConvert.SerializeObject(inputExpressions);
+            input = input.Replace("ConsoleApp3", "WmsPosApi.Models.BaseModels");
+
+            //expressionString.Name = s;
+            //string xxxx = JsonConvert.SerializeObject(expressionString);
+
+            var client = new RestClient("http://rootwms.azurewebsites.net/api/PostGetVendors");
             var request = new RestRequest(Method.POST);
             request.AddHeader("postman-token", "e72cf7ad-5f5c-d51a-d2a0-587bb689b350");
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("content-type", "application/json");
-            request.AddParameter("application/json", s1, ParameterType.RequestBody);
+            request.AddParameter("application/json", input, ParameterType.RequestBody);
             //request.AddParameter("application/json", IncludeString, ParameterType.RequestBody);
             //request.AddParameter("application/json", xxxx);
             IRestResponse response = client.Execute(request);
