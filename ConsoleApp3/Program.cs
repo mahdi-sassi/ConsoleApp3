@@ -64,19 +64,21 @@ namespace ConsoleApp3
         }
         static void  Main(string[] args)
         {
-
-            string strPassword = "123qwe";
-            string strUserName = "Admin@root.sa"; 
-            byte[] bytePassword = Encoding.ASCII.GetBytes(strPassword);
-            byte[] byteUserName = Encoding.ASCII.GetBytes(strUserName);
             Hash hash = new Hash();
-            byte[] ByteHashPassword = hash.Encrypt(ref bytePassword);
-            byte[] ByteHashUserName = hash.Encrypt(ref byteUserName);
-            string base64Password = Convert.ToBase64String(ByteHashPassword);
-            string base64UserName = Convert.ToBase64String(ByteHashUserName);
-            byte[] b = Convert.FromBase64String(base64Password);
-            byte[] xxx = hash.Encrypt(ref b);
-            string strings = Encoding.ASCII.GetString(xxx);
+            string base64Password=hash.hash("123qwe");
+            string base64UserName = hash.hash("Admin@root.sa");
+            //string strPassword = "123qwe";
+            //string strUserName = "Admin@root.sa"; 
+            //byte[] bytePassword = Encoding.ASCII.GetBytes(strPassword);
+            //byte[] byteUserName = Encoding.ASCII.GetBytes(strUserName);
+
+            //byte[] ByteHashPassword = hash.Encrypt(ref bytePassword);
+            //byte[] ByteHashUserName = hash.Encrypt(ref byteUserName);
+            //string base64Password = Convert.ToBase64String(ByteHashPassword);
+            //string base64UserName = Convert.ToBase64String(ByteHashUserName);
+            //byte[] b = Convert.FromBase64String(base64Password);
+            //byte[] xxx = hash.Encrypt(ref b);
+            //string strings = Encoding.ASCII.GetString(xxx);
             var xhxhx = 0;
 
 

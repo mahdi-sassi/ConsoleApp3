@@ -8,6 +8,13 @@ namespace ConsoleApp3
 {
     class Hash
     {
+        public string hash(string value)
+        {
+            byte[] bytePassword = Encoding.ASCII.GetBytes(value);
+            byte[] ByteHashPassword = Encrypt(ref bytePassword);
+            string base64Password = Convert.ToBase64String(ByteHashPassword);
+            return base64Password;
+        }
         public byte[] Encrypt(ref byte[] password)
         {
             DateTime dateTime = DateTime.Now;
