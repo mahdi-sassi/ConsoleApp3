@@ -18,6 +18,9 @@ using Aq.ExpressionJsonSerializer.Tests;
 using static Aq.ExpressionJsonSerializer.Tests.ExpressionJsonSerializerTest;
 using RestSharp;
 using Root.Services.ExpressionJson;
+using ConsoleApp3.Models;
+using ClassLibrary1;
+using System.Text;
 
 namespace ConsoleApp3
 {
@@ -61,44 +64,138 @@ namespace ConsoleApp3
         }
         static void  Main(string[] args)
         {
+
+            string strPassword = "123qwe";
+            string strUserName = "Admin@root.sa"; 
+            byte[] bytePassword = Encoding.ASCII.GetBytes(strPassword);
+            byte[] byteUserName = Encoding.ASCII.GetBytes(strUserName);
+            Hash hash = new Hash();
+            byte[] ByteHashPassword = hash.Encrypt(ref bytePassword);
+            byte[] ByteHashUserName = hash.Encrypt(ref byteUserName);
+            string base64Password = Convert.ToBase64String(ByteHashPassword);
+            string base64UserName = Convert.ToBase64String(ByteHashUserName);
+            byte[] b = Convert.FromBase64String(base64Password);
+            byte[] xxx = hash.Encrypt(ref b);
+            string strings = Encoding.ASCII.GetString(xxx);
+            var xhxhx = 0;
+
+
+
+            var client = new RestClient("http://localhost:55574/api/account/Login");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("postman-token", "58c4b473-b70d-dd4d-973e-82fd80edb2e8");
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("content-type", "application/json");
+            request.AddParameter("application/json", "{\n\t\"Grant_Type\":\"password\",\n\t\"Password\":\""+ base64Password+"\",\n\t\"UserName\":\""+base64UserName+"\"\n}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+
+
+
+
+            //Console.WriteLine(strings);
+            //Console.ReadLine();
+            //Console.WriteLine(BitConverter.ToString(bytePassword));
+            //Console.ReadLine();
+            //string ss = BitConverter.ToString(ByteHashPassword);
+            //string hashpass = "";
+
+            //for (int i = 0; i < ss.Length; i = i + 3)
+            //{
+            //    string x = ss.Substring(i, 2);
+            //    long n1 = Int64.Parse(x.ToString(), System.Globalization.NumberStyles.HexNumber);
+            //    hashpass = hashpass + n1.ToString() + "-";
+            //}
+            //Console.WriteLine(hashpass);
+            //Console.ReadLine();
+
+            //Console.WriteLine(BitConverter.ToString(AsciiByteHashPassword));
+            //Console.ReadLine();
+
+
+
+
+
+
+
+
+
+            List<Vendors> li = new List<Vendors>()
+            {
+                new Vendors
+                {
+                    ID=Guid.NewGuid(),
+                    UpdatedDate = DateTime.Now,
+                    NameAr = "بلابهعبه",
+                    NameEn = "dhbkfj"
+                },
+                new Vendors
+                {
+                    ID = Guid.NewGuid(),
+                    UpdatedDate = DateTime.Now.AddHours(-1),
+                    NameAr = "بلابهعبه",
+                    NameEn = "dhbkfj"
+                }
+            };
+            IQueryable<Vendors> vendors = li.AsQueryable();
+
             var expressionJson = new ExpressionJson<Vendors>();
-            var jsonString = expressionJson.Serialize((Expression<Func<Vendors, bool>>)(c => c.NameEn.Length<2 && c.DescriptionAr == "zzzzzzz"));
+            var jsonString = expressionJson.Serialize((Expression<Func<Vendors, bool>>)(c => c.UpdatedDate<DateTime.Now&&c.IsDeleted==false));
+            string s = jsonString;// JsonConvert.SerializeObject(jsonString);
+                                  //while(s.Contains("ConsoleApp3.Models.BaseTable"))
+                                  //{
+                                  //    StringReplace stringReplace = new StringReplace();
+                                  //    s = stringReplace.replace(s);
+                                  //}
+            //s = s.Replace("ConsoleApp3.Models", "WmsPosApi.Models");
+            //s = s.Replace("ConsoleApp3", "BLL.Models");
             var IncludeJson = expressionJson.Serialize((Expression<Func<Vendors, object>>)(c => c.VendorsCategories));
-            var OrderByJson = expressionJson.Serialize((Expression<Func<Vendors, Object>>)(c => c.NameEn));
+            var OrderByJson = expressionJson.Serialize((Expression<Func<Vendors, Object>>)(c => c.UpdatedDate));
             //var jsonString =TestExpression((Expression<Func<Categorys, bool>>)(c => c.Address=="" && c.Name==""));
             //expressionJson.Deserialize(OrderByJson).Reduce
 
-            string OrderByString = JsonConvert.SerializeObject(OrderByJson);
-            OrderByString = OrderByString.Replace("ConsoleApp3", "WmsPosApi.Models.BaseModels");
 
-            string IncludeString = JsonConvert.SerializeObject(IncludeJson);
-            IncludeString = IncludeString.Replace("ConsoleApp3", "WmsPosApi.Models.BaseModels");
-            string s = JsonConvert.SerializeObject(jsonString);
-            string s1 = s.Replace("ConsoleApp3", "WmsPosApi.Models.BaseModels");
+            LambdaExpression or = expressionJson.Deserialize(OrderByJson);
+            LambdaExpression exppp = expressionJson.Deserialize(s);
+            var v =vendors.Where((Expression<Func<Vendors, bool>>)exppp).OrderBy((Expression<Func<Vendors, Object>>)or).ToList();
+
+
+
+            string OrderByString = OrderByJson; //JsonConvert.SerializeObject(OrderByJson);
+            //OrderByString = OrderByString.Replace("ConsoleApp3.Models.BaseTable", "BLL.Models");
+            //OrderByString = OrderByString.Replace("ConsoleApp3.Models", "WmsPosApi.Models");
+            //OrderByString = OrderByString.Replace("ConsoleApp3", "BLL.Models");
+
+            string IncludeString = IncludeJson;// JsonConvert.SerializeObject(IncludeJson);
+            //IncludeString = IncludeString.Replace("ConsoleApp3.Models.BaseTable", "BLL.Models");
+            //IncludeString = IncludeString.Replace("ConsoleApp3.Models", "WmsPosApi.Models");
+            //IncludeString = IncludeString.Replace("ConsoleApp3", "BLL.Models");
 
 
             InputExpressions inputExpressions = new InputExpressions();
-            inputExpressions.expression = s1;
-            inputExpressions.inclules = new List<string>();
-            inputExpressions.orderBy = new List<string>();
-            inputExpressions.inclules.Add(IncludeString);
-            inputExpressions.orderBy.Add(OrderByString);
+            inputExpressions.Expression = s;
+            inputExpressions.Includes = new List<string>();
+            inputExpressions.OrderBy = new List<string>();
+            //inputExpressions.Includes.Add(IncludeString);
+            //inputExpressions.OrderBy.Add(OrderByString);
+            inputExpressions.Skip = 0;
+            inputExpressions.Take = 0;
 
             string input = JsonConvert.SerializeObject(inputExpressions);
-            input = input.Replace("ConsoleApp3", "WmsPosApi.Models.BaseModels");
+            //input = input.Replace("ConsoleApp3", "WmsPosApi.Models");
 
             //expressionString.Name = s;
             //string xxxx = JsonConvert.SerializeObject(expressionString);
 
-            var client = new RestClient("http://rootwms.azurewebsites.net/api/PostGetVendors");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("postman-token", "e72cf7ad-5f5c-d51a-d2a0-587bb689b350");
-            request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("content-type", "application/json");
-            request.AddParameter("application/json", input, ParameterType.RequestBody);
-            //request.AddParameter("application/json", IncludeString, ParameterType.RequestBody);
-            //request.AddParameter("application/json", xxxx);
-            IRestResponse response = client.Execute(request);
+            //var client = new RestClient("http://rootwms.azurewebsites.net/api/PostGetVendors");
+            //var client = new RestClient("http://192.168.1.26:45455/api/PostGetVendors");
+            //var request = new RestRequest(Method.POST);
+            //request.AddHeader("postman-token", "e72cf7ad-5f5c-d51a-d2a0-587bb689b350");
+            //request.AddHeader("cache-control", "no-cache");
+            //request.AddHeader("content-type", "application/json");
+            //request.AddParameter("application/json", input, ParameterType.RequestBody);
+            ////request.AddParameter("application/json", IncludeString, ParameterType.RequestBody);
+            ////request.AddParameter("application/json", xxxx);
+            //IRestResponse response = client.Execute(request);
 
             var x12 = 0;
 

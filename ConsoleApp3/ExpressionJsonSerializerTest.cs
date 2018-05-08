@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using ConsoleApp3;
+using ConsoleApp3.Models;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 

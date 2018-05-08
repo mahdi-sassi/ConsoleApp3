@@ -8,10 +8,10 @@ namespace ConsoleApp3
 {
     public class InputExpressions
     {
-        public string expression { get; set; }
-        public List<string> inclules { get; set; }
-        public List<string> orderBy { get; set; }
+        public string Expression { get; set; }
+        public List<string> Includes { get; set; }
+        public List<string> OrderBy { get; set; }
         public int Skip { get; set; }
-        public int take { get; set; }
+        public int Take { get; set; }
     }
 }

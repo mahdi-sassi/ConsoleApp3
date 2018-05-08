@@ -37,6 +37,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\BuilderExpression\BuilderExpression\bin\Debug\BuilderExpression.dll</HintPath>
     </Reference>
+    <Reference Include="ClassLibrary1">
+      <HintPath>..\ClassLibrary1\bin\Debug\ClassLibrary1.dll</HintPath>
+    </Reference>
     <Reference Include="ExpressionJsonSerializer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Documents\My Received Files\ExpressionJsonSerializer.dll</HintPath>
@@ -91,6 +94,12 @@
     <Compile Include="Hash.cs" />
     <Compile Include="InputExpressions.cs" />
     <Compile Include="Login.cs" />
+    <Compile Include="Models\BaseTable\Domains.cs" />
+    <Compile Include="Models\BaseTable\Table.cs" />
+    <Compile Include="Models\BaseTable\TableInfo.cs" />
+    <Compile Include="Models\BaseTable\TableInfoShort.cs" />
+    <Compile Include="Models\BaseTable\TableName.cs" />
+    <Compile Include="Models\BaseTable\TableNameShort.cs" />
     <Compile Include="Parametres.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,13 +108,14 @@
     <Compile Include="TestClass.cs" />
     <Compile Include="testExpression.cs" />
     <Compile Include="Token.cs" />
-    <Compile Include="Vendors.cs" />
-    <Compile Include="VendorsCategories.cs" />
+    <Compile Include="Models\Vendors.cs" />
+    <Compile Include="Models\VendorsCategories.cs" />
     <Compile Include="WhereBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
