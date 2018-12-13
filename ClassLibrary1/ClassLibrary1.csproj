@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Serialize.Linq">
+      <HintPath>..\..\WmsPosApi\WmsPosApi\bin\Serialize.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,12 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseInteface\IDomains.cs" />
-    <Compile Include="BaseInteface\ITable.cs" />
-    <Compile Include="BaseInteface\ITableInfo.cs" />
-    <Compile Include="BaseInteface\ITableInfoShort.cs" />
-    <Compile Include="BaseInteface\ITableName.cs" />
-    <Compile Include="BaseInteface\ITableNameShort.cs" />
     <Compile Include="StringReplace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

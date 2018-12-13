@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BLL">
+      <HintPath>..\..\WMS.POS.BLL\BLL\bin\Release\BLL.dll</HintPath>
+    </Reference>
     <Reference Include="BuilderExpression, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\BuilderExpression\BuilderExpression\bin\Debug\BuilderExpression.dll</HintPath>
@@ -40,20 +43,43 @@
     <Reference Include="ClassLibrary1">
       <HintPath>..\ClassLibrary1\bin\Debug\ClassLibrary1.dll</HintPath>
     </Reference>
+    <Reference Include="EJS.Core">
+      <HintPath>..\..\..\..\Desktop\jsonSerialize\EJS.Core-master\EJS.Core\bin\Debug\netstandard1.5\EJS.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="ExpressionJsonSerializer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Documents\My Received Files\ExpressionJsonSerializer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.2.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.2.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=106.2.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.106.2.1\lib\net452\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=106.2.2.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.2.2\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Serialize.Linq">
+      <HintPath>..\..\..\..\Documents\My Received Files\Serialize.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.2.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO">
       <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
       <Private>True</Private>
@@ -66,6 +92,8 @@
       <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Security.Cryptography.X509Certificates">
       <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
       <Private>True</Private>
@@ -81,10 +109,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Twilio, Version=5.13.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.5.13.0\lib\net451\Twilio.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Brands.cs" />
+    <Compile Include="callAPI.cs" />
     <Compile Include="Categorys.cs" />
-    <Compile Include="Domains.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Employees.cs" />
     <Compile Include="expressionJson.cs" />
     <Compile Include="ExpressionJsonSerializerTest.cs" />
@@ -93,29 +126,137 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="Hash.cs" />
     <Compile Include="InputExpressions.cs" />
+    <Compile Include="IVarianceTypes.cs" />
+    <Compile Include="IVarianceTypesProductTypes.cs" />
+    <Compile Include="JsonDeserializeExpression.cs" />
+    <Compile Include="JsonNetAdapter.cs" />
     <Compile Include="Login.cs" />
-    <Compile Include="Models\BaseTable\Domains.cs" />
-    <Compile Include="Models\BaseTable\Table.cs" />
-    <Compile Include="Models\BaseTable\TableInfo.cs" />
-    <Compile Include="Models\BaseTable\TableInfoShort.cs" />
-    <Compile Include="Models\BaseTable\TableName.cs" />
-    <Compile Include="Models\BaseTable\TableNameShort.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\AmountType.cs" />
+    <Compile Include="Models\Banks.cs" />
+    <Compile Include="Models\BigImageSettings.cs" />
+    <Compile Include="Models\Colors.cs" />
+    <Compile Include="Models\Country.cs" />
+    <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\Customers.cs" />
+    <Compile Include="Models\DesginPaddingImages.cs" />
+    <Compile Include="Models\DesignedProductBatchDefinitionImages.cs" />
+    <Compile Include="Models\DesignedProductImages.cs" />
+    <Compile Include="Models\DesignedProducts.cs" />
+    <Compile Include="Models\DimensionMeasurements.cs" />
+    <Compile Include="Models\DimensionsDefinitions.cs" />
+    <Compile Include="Models\DiscountQualifications.cs" />
+    <Compile Include="Models\DomainsVM.cs" />
+    <Compile Include="Models\EmailInput.cs" />
+    <Compile Include="Models\EmailModels.cs" />
+    <Compile Include="Models\FieldValidation.cs" />
+    <Compile Include="Models\FreeGoods.cs" />
+    <Compile Include="Models\groupby.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImageGroup.cs" />
+    <Compile Include="Models\ImageSizes.cs" />
+    <Compile Include="Models\InventoryTransactions.cs" />
+    <Compile Include="Models\InventoryTransactionsDetails.cs" />
+    <Compile Include="Models\InventoryTransactionsTypes.cs" />
+    <Compile Include="Models\InvoiceDetails.cs" />
+    <Compile Include="Models\InvoiceDetailsStatus.cs" />
+    <Compile Include="Models\Invoices.cs" />
+    <Compile Include="Models\InvoiceStatus.cs" />
+    <Compile Include="Models\InvoiceSubTotals.cs" />
+    <Compile Include="Models\InvoiceSubTotalTypes.cs" />
+    <Compile Include="Models\Item.cs" />
+    <Compile Include="Models\ITestAppContext.cs" />
+    <Compile Include="Models\Orders.cs" />
+    <Compile Include="Models\PaymentMethods.cs" />
+    <Compile Include="Models\Payments.cs" />
+    <Compile Include="Models\PriceDiscounts.cs" />
+    <Compile Include="Models\PriceDiscountTypes.cs" />
+    <Compile Include="Models\PriceTypes.cs" />
+    <Compile Include="Models\ProductBatchDefinitionImageCategories.cs" />
+    <Compile Include="Models\ProductBatchDefinitions.cs" />
+    <Compile Include="Models\ProductBatches.cs" />
+    <Compile Include="Models\ProductBatchItems.cs" />
+    <Compile Include="Models\ProductBatchItemShelves.cs" />
+    <Compile Include="Models\ProductBatchItemsImages.cs" />
+    <Compile Include="Models\ProductBatchItemsSmallImages.cs" />
+    <Compile Include="Models\ProductCategories.cs" />
+    <Compile Include="Models\ProductCategoriesImages.cs" />
+    <Compile Include="Models\ProductCategoriesProductTypes.cs" />
+    <Compile Include="Models\ProductDetailsTypes.cs" />
+    <Compile Include="Models\ProductDetailsTypesDetails.cs" />
+    <Compile Include="Models\ProductDetailsTypesDetailsProducts.cs" />
+    <Compile Include="Models\ProductImages.cs" />
+    <Compile Include="Models\ProductPrices.cs" />
+    <Compile Include="Models\ProductSetLists.cs" />
+    <Compile Include="Models\ProductSmallImages.cs" />
+    <Compile Include="Models\ProductsName.cs" />
+    <Compile Include="Models\ProductStores.cs" />
+    <Compile Include="Models\ProductStoresJoinUser.cs" />
+    <Compile Include="Models\ProductStoresRows.cs" />
+    <Compile Include="Models\ProductStoresShelves.cs" />
+    <Compile Include="Models\ProductTypes.cs" />
+    <Compile Include="Models\ProductTypesImages.cs" />
+    <Compile Include="Models\ProformaInvoice.cs" />
+    <Compile Include="Models\ProformaInvoiceDetails.cs" />
+    <Compile Include="Models\PurchaseOrderDetails.cs" />
+    <Compile Include="Models\PurchaseOrderPayement.cs" />
+    <Compile Include="Models\PurchaseOrders.cs" />
+    <Compile Include="Models\PurchaseOrderShippment.cs" />
+    <Compile Include="Models\PurchaseOrderShippmentDetails.cs" />
+    <Compile Include="Models\PurchaseOrderShippmentItems.cs" />
+    <Compile Include="Models\ShippingAddresses.cs" />
+    <Compile Include="Models\ShippmentUnits.cs" />
+    <Compile Include="Models\ShippmentUnitsImages.cs" />
+    <Compile Include="Models\Sizes.cs" />
+    <Compile Include="Models\SmallImageSettings.cs" />
+    <Compile Include="Models\StoreAppContext.cs" />
+    <Compile Include="Models\TagModels.cs" />
+    <Compile Include="Models\TagProducts.cs" />
+    <Compile Include="Models\TemperatureType.cs" />
+    <Compile Include="Models\TransferRequestBatchs.cs" />
+    <Compile Include="Models\TransferRequestDetails.cs" />
+    <Compile Include="Models\TransferRequests.cs" />
+    <Compile Include="Models\Units.cs" />
+    <Compile Include="Models\UnitTypes.cs" />
+    <Compile Include="Models\ValidationParentClass.cs" />
+    <Compile Include="Models\VarianceTypesProducts.cs" />
+    <Compile Include="Models\VarianceValues.cs" />
+    <Compile Include="Models\VarianceValuesProductBatchDefinitions.cs" />
+    <Compile Include="Models\Vendors.cs" />
+    <Compile Include="Models\VendorsCategories.cs" />
+    <Compile Include="Models\VendorsContacts.cs" />
+    <Compile Include="Models\WeightMeasurements.cs" />
     <Compile Include="Parametres.cs" />
+    <Compile Include="print.cs" />
+    <Compile Include="printer.cs" />
+    <Compile Include="Coupons.cs" />
+    <Compile Include="ProductList.cs" />
+    <Compile Include="Products.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyInformation.cs" />
     <Compile Include="RC4.cs" />
     <Compile Include="SendLogin.cs" />
+    <Compile Include="SMS.cs" />
     <Compile Include="TestClass.cs" />
     <Compile Include="testExpression.cs" />
     <Compile Include="Token.cs" />
-    <Compile Include="Models\Vendors.cs" />
-    <Compile Include="Models\VendorsCategories.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="WhereBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="XMLFile1.xml">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
