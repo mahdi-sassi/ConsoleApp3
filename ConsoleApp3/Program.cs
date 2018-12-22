@@ -28,6 +28,7 @@ using System.Windows.Forms;
 using System.Drawing.Printing;
 using BLL.Models;
 using ConsoleApp3;
+using System.Data.Entity.Spatial;
 
 namespace ConsoleApp3
 {
@@ -46,7 +47,6 @@ namespace ConsoleApp3
                 formatter.Serialize(s, o);
                 size = s.Length;
             }
-
 
 
             //dynamic text = new List<string>() {
@@ -127,17 +127,17 @@ namespace ConsoleApp3
             //ProductList productList = new ProductList();
 
             DateTime? id = DateTime.Now;
-            Expression <Func<Invoices,object>> exp = p =>p.CreatedDate ;
+            Expression <Func<ProductDetailsTypes,bool>> exp = p =>p.ProductTypeID == Guid.Parse("7F0B18E8-5E56-4298-A926-07F822D69F99") ;
             //Expression<Func<Coupons, bool>> exp = p => p.Code == "TEST123" && p.Totalamount == 2500;
-            var expJson = JsonDeserializeExpression<Invoices>.SerializeWhere(exp);
-            var expdes = JsonDeserializeExpression<Invoices>.DeserializeOrderBy(expJson);
-            List<string> Listexp = new List<string>();
-            Listexp.Add(expJson);
-            var seri = JsonConvert.SerializeObject(Listexp);
+            var expJson = JsonDeserializeExpression<ProductDetailsTypes>.SerializeWhere(exp);
+            var expdes = JsonDeserializeExpression<ProductDetailsTypes>.DeserializeOrderBy(expJson);
+            //List<string> Listexp = new List<string>();
+            //Listexp.Add(expJson);
+            //var seri = JsonConvert.SerializeObject(Listexp);
             int t = expJson.IndexOf('V');
-            InputExpressions inputExpressions = new InputExpressions { Expression = null, Includes = null, OrderBy = Listexp};
+            InputExpressions inputExpressions = new InputExpressions { Expression = expJson, Includes = null, OrderBy = null};
             var json = JsonConvert.SerializeObject(inputExpressions);
-            var client = new RestClient("http://localhost:55577/api/PostGetInvoices");
+            var client = new RestClient("https://brandfull.com/webapi2/api/PostGetProductDetailsTypes");
             var request = new RestRequest(Method.POST);
             request.AddHeader("postman-token", "6924b19a-0572-b10f-5d3b-efbaae137633");
             request.AddHeader("cache-control", "no-cache");
